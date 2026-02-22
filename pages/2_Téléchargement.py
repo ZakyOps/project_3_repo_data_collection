@@ -12,7 +12,7 @@ Ces données sont fournies telles quelles (*brutes*), sans aucun post-traitement
 """)
 st.markdown("---")
 
-data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'raw_webscraper_data.csv')
+data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'coinafrique_animaux.csv')
 
 try:
     df_raw = pd.read_csv(data_path)

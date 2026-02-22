@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import time
 import os
 
-st.set_page_config(page_title="Scraper", layout="wide")
+st.set_page_config(page_title="Collecte de données", layout="wide")
 
 # CSS and styling
 st.markdown("""

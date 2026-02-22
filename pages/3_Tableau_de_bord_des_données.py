@@ -19,24 +19,32 @@ def load_and_clean_data(file_path):
     cols_to_drop = ['web-scraper-order', 'web-scraper-start-url']
     df = df.drop(columns=[c for c in cols_to_drop if c in df.columns], errors='ignore')
     
+    # Nettoyage de la catégorie
     def get_cat(row):
-        val = str(row.get('V1_Nom_ou_details', '')).lower()
-        if 'chien' in val: return 'Chiens'
-        if 'mouton' in val: return 'Moutons'
-        if 'poule' in val or 'lapin' in val or 'pigeon' in val: return 'Poules, Lapins, Pigeons'
+        val_v1 = str(row.get('V1', row.get('V1_Nom_ou_details', ''))).lower()
+        # On regarde aussi l'URL si V1 est vide
+        val_url = str(row.get('web_scraper_start_url', '')).lower()
+        combined = val_v1 + " " + val_url
+        
+        if 'chiens' in combined or 'chien' in combined: return 'Chiens'
+        if 'moutons' in combined or 'mouton' in combined: return 'Moutons'
+        if 'poules' in combined or 'lapins' in combined or 'pigeons' in combined: return 'Poules, Lapins, Pigeons'
         return 'Autres Animaux'
         
     df['Categorie'] = df.apply(get_cat, axis=1)
     
-    df['Prix_Num'] = df['V2_prix'].astype(str).str.replace('CFA', '', regex=False)
-    df['Prix_Num'] = df['Prix_Num'].str.replace(' ', '', regex=False)
+    # Nettoyage du prix : on garde NaN pour les calculs
+    price_col = 'V2' if 'V2' in df.columns else 'V2_prix'
+    df['Prix_Num'] = df[price_col].astype(str).str.replace('CFA', '', regex=False).str.replace(' ', '', regex=False)
+    # Remplacer les virgules éventuelles par des points ou rien si c'est un séparateur de milliers
     df['Prix_Num'] = pd.to_numeric(df['Prix_Num'], errors='coerce')
     
-    df = df.fillna('N/A')
+    # Remplir les autres colonnes pour l'affichage, mais laisser Prix_Num tel quel pour le moment
+    # ou remplir Prix_Num après le calcul. Préférable de garder les NaNs pour mean()
     
     return df
 
-data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'raw_webscraper_data.csv')
+data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'coinafrique_animaux.csv')
 df_clean = load_and_clean_data(data_path)
 
 if df_clean is not None:
@@ -88,7 +96,18 @@ if df_clean is not None:
             
     with tab_data:
         st.subheader("Jeu de données après traitement")
-        st.dataframe(df_clean, use_container_width=True)
+        st.dataframe(df_clean.fillna('N/A'), use_container_width=True)
+        
+        # Add download button for cleaned data
+        csv_clean = df_clean.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="Télécharger les données nettoyées (.csv)",
+            data=csv_clean,
+            file_name='coinafrique_animaux_clean.csv',
+            mime='text/csv',
+            use_container_width=False,
+            help="Téléchargez la version traitée avec les catégories détectées et les prix numériques."
+        )
         
 else:
     st.warning("Aucune donnée brute trouvée pour générer ce tableau de bord.")

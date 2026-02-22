@@ -22,4 +22,4 @@ Thumbs.db
 
 # Fichiers temporaires de données
 data/*.csv
-!data/raw_webscraper_data.csv
+!data/coinafrique_animaux.csv

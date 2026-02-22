@@ -13,7 +13,7 @@ st.markdown("---")
 st.info("Utilisez le formulaire ci-dessous pour évaluer l'application. Vos retours nous sont précieux !")
 google_form_url = st.text_input(
     "Lien du formulaire (KoboToolbox) :", 
-    value="https://ee.kobotoolbox.org/x/AIM4uYKh"
+    value="https://ee.kobotoolbox.org/x/l44724xP"
 )
 
 if google_form_url:
