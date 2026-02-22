@@ -1,0 +1,25 @@
+# Environnement virtuel
+.venv/
+env/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Streamlit
+.streamlit/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Base de données locale (SQLite)
+*.db
+
+# Fichiers temporaires de données
+data/*.csv
+!data/raw_webscraper_data.csv

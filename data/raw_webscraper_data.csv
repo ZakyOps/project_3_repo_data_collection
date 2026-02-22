@@ -1,0 +1,5 @@
+web-scraper-order,web-scraper-start-url,V1_Nom_ou_details,V2_prix,V3_adresse,V4_image_lien-src
+1708605001-1,https://sn.coinafrique.com/categorie/chiens,Chien berger allemand,"250 000 CFA",Dakar - Sénégal,https://images.coinafrique.com/fake1.jpg
+1708605002-2,https://sn.coinafrique.com/categorie/moutons,Mouton Ladoum Male,"650 000 CFA",Thies - Sénégal,https://images.coinafrique.com/fake2.jpg
+1708605003-3,https://sn.coinafrique.com/categorie/poules-lapins-et-pigeons,Poule pondeuse x10,"45 000 CFA",Rufisque - Sénégal,https://images.coinafrique.com/fake3.jpg
+1708605004-4,https://sn.coinafrique.com/categorie/autres-animaux,Chat gris croisé,"50 000 CFA",Pikine - Sénégal,https://images.coinafrique.com/fake4.jpg
