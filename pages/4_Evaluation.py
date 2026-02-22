@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import io
 
 st.set_page_config(page_title="Evaluation")
 
@@ -6,10 +8,12 @@ st.title("Formulaire d'évaluation")
 
 st.write("Merci d'avoir utilisé notre application ! Veuillez remplir le formulaire d'évaluation ci-dessous.")
 
-st.info("L'URL par défaut ci-dessous est un modèle vide. Vous pouvez coller le lien de votre propre formulaire (Google Forms ou Kobo) dans la case.")
+st.markdown("---")
+
+st.info("Utilisez le formulaire ci-dessous pour évaluer l'application. Vos retours nous sont précieux !")
 google_form_url = st.text_input(
-    "Lien de votre formulaire :", 
-    value="https://docs.google.com/forms/d/e/1FAIpQLSf4oHly6t4yIe-M_0o1EebpGg0wz869pYmKzJbbYp-XoYxIfQ/viewform?embedded=true"
+    "Lien du formulaire (KoboToolbox) :", 
+    value="https://ee.kobotoolbox.org/x/AIM4uYKh"
 )
 
 if google_form_url:
